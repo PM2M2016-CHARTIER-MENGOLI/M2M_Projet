@@ -1,0 +1,19 @@
+Source :
+https://elementztechblog.wordpress.com/2014/12/22/sharing-internet-using-network-over-usb-in-beaglebone-black/
+
+
+1) Sur BeagleBone Black :
+
+ifconfig usb0 192.168.7.2
+route add default gw 192.168.7.1
+
+2) Sur ma machine :
+
+ifconfig eth1 192.168.7.1
+iptables --table nat --append POSTROUTING --out-interface wlan0 -j MASQUERADE
+iptables --append FORWARD --in-interface eth1 -j ACCEPT
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+3) Sur BeagleBone Black :
+
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf

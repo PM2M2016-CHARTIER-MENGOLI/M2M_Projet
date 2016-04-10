@@ -1,0 +1,3 @@
+2016-03-15 15:02:59,211 - MainThread - rfxcmd:4004 - ERROR - Error: Failed to connect on device /dev/ttyUSB0 Line: [open_serialport:4004]
+2015-03-01 20:50:28,958 - MainThread - rfxcmd:4004 - ERROR - Error: Failed to connect on device /dev/ttyUSB0 Line: [open_serialport:4004]
+2015-03-01 20:50:41,868 - MainThread - rfxcmd:4004 - ERROR - Error: Failed to connect on device /dev/ttyUSB0 Line: [open_serialport:4004]
