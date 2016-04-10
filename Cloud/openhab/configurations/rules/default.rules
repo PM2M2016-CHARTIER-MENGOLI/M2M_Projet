@@ -1,0 +1,44 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+
+var Timer waitTimerTemp1 = null
+var Timer waitTimerTemp2 = null
+var Timer waitTimerHumidity = null
+var boolean sentTemperature1 = false
+var boolean sentTemperature2 = false
+var boolean sentHumidity = false 
+rule "Attention à la temperature !"
+when
+	Item Temperature changed
+then
+	logInfo("Temperature: ", Temperature.state.toString())
+	if (!sentTemperature1 && Temperature.state > 30) {
+		sendMail("mengoli.jeanluc@gmail.com", "Ca chauffe beaucoups", "Temperature remontée par le beaglebones  " + Temperature.state)
+		sentTemperature1 = true
+		waitTimerTemp1 = createTimer(now.plusMinutes(5))[|
+			sentTemperature1 = false
+		]
+	}
+	if(!sentTemperature2 && Temperature.state < 0) {
+		sendMail("mengoli.jeanluc@gmail.com", "Il fait très froid, il faut se couvrir !", "Temperature remontée par le capteur : " + Temperature.state)
+		sentTemperature2 = true
+		waitTimerTemp2 = createTimer(now.plusMinutes(5))[|
+			 sentTemperature = false
+		]
+	}
+end
+rule "Attention à l'humidité !"
+when
+       Item Humidity changed
+then
+	logInfo("Humidity : ", Humidity.state.toString())
+        if(!sentHumidity && Humidity.state > 65) {
+                sendMail("mengoli.jeanluc@gmail.com", "C'est très humide, il doit pleuvoir!", "Humidité remontée par le capteur : " + Humidity.state)
+                sentHumidity = true
+                waitTimerHumidity = createTimer(now.plusMinutes(5))[|
+                        sentHumidity = false
+                ]
+        }
+
+end

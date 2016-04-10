@@ -1,0 +1,6 @@
+Group All
+Group Temperature_Chart  
+Number Temperature "Temperature [%.1f °C]" <temperature> (Temperature_Chart) {mqtt="<[brokerCaptorM2M:Captor/M2M/temp:state:default]"}
+Number Humidity "Humidité [%.1f ]" <cistern> {mqtt="<[brokerCaptorM2M:Captor/M2M/humidity:state:default]"}
+Number UV "UV [%.1f ]" <sun>  {mqtt="<[brokerCaptorM2M:Captor/M2M/UV:state:default]"}
+

@@ -1,0 +1,40 @@
+sitemap default label="Main Menu"
+{
+	Frame label="Température" {
+                Text item=Temperature valuecolor=[>25="red", >10="orange", <=10="blue"] 
+		Text label="Historique des températures " icon="chart" {
+		Switch item=Chart_Period label="" mappings=[1="Day", 2="Week", 3="Month"]
+		Chart item=Temperature period=D refresh=30000 visibility=[Chart_Period==1, Chart_Period=="Uninitialized"]
+		Chart item=Temperature period=W refresh=21600000 visibility=[Chart_Period==2] // 1 week
+		Chart item=Temperature period=M refresh=21600000 visibility=[Chart_Period==3] // 1 month
+		}
+
+        }
+        Frame label="UV" {
+		Text item=UV valuecolor=[>60="orange",<=60="grey"] 
+		Text label="Historique des UV" icon="chart" {
+			Switch item=Chart_Period label="" mappings=[1="Day", 2="Week", 3="Month"]
+			Chart item=UV period=D refresh=30000 visibility=[Chart_Period==1, Chart_Period=="Uninitialized"]
+			Chart item=UV period=W refresh=21600000 visibility=[Chart_Period==2] // 1 week
+			Chart item=UV period=M refresh=21600000 visibility=[Chart_Period==3] // 1 month
+		}
+        }
+        Frame label="Humidité" {
+                Text item=Humidity
+		Text label="Historique des humidités" icon="chart" {
+			Switch item=Chart_Period label="" mappings=[1="Day", 2="Week", 3="Month"]
+			Chart item=Humidity period=D refresh=30000 visibility=[Chart_Period==1, Chart_Period=="Uninitialized"]
+			Chart item=Humidity period=W refresh=21600000 visibility=[Chart_Period==2] // 1 week
+			Chart item=Humidity period=M refresh=21600000 visibility=[Chart_Period==3] // 1 month
+		}
+        }
+	Frame label="Historique Mixte" {
+		Text label="Historique température et humidité" icon="chart" {
+			Switch item=Chart_Period label="" mappings=[1="Day", 2="Week", 3="Month"]
+			Chart item=Temperature_Chart period=D refresh=30000 visibility=[Chart_Period==1, Chart_Period=="Uninitialized"]
+			Chart item=Temperature_Chart period=W refresh=21600000 visibility=[Chart_Period==2]
+			Chart item=Temperature_Chart period=M refresh=21600000 visibility=[Chart_Period==3]
+		}
+	}	
+}
+
